@@ -17,12 +17,8 @@ public class DeliveryPersonnelService {
     RestTemplate restTemplate;
 
     public List<DeliveryPersonnel> getAll() {
-        System.out.println("entereted deliverypersonnel service");
-
         String url = "http://localhost:8080/user-management/users";
         DeliveryPersonnel[] deliveryPersonnels = restTemplate.getForObject(url, DeliveryPersonnel[].class);
-        System.out.println("called user service");
-        System.out.println(deliveryPersonnels.length);
 
         if(deliveryPersonnels != null) {
             List<DeliveryPersonnel> deliveryPersonnelList = Arrays.asList(deliveryPersonnels);
@@ -31,7 +27,6 @@ public class DeliveryPersonnelService {
                 if(Objects.equals(item.getRole(), "DELIVERY_PERSONNEL")) deliveryPersonnelListWithRoleDelivery.add(item);
             });
 
-            System.out.println("Delivery Partners = " + deliveryPersonnelListWithRoleDelivery);
             return deliveryPersonnelListWithRoleDelivery;
         }
         else return List.of();
