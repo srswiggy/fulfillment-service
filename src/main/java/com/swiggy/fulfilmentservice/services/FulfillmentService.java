@@ -4,7 +4,9 @@ import com.swiggy.fulfilmentservice.models.Delivery;
 import com.swiggy.fulfilmentservice.models.DeliveryPersonnel;
 import com.swiggy.fulfilmentservice.models.Location;
 import com.swiggy.fulfilmentservice.models.Status;
+import com.swiggy.fulfilmentservice.repositories.DeliveryRepository;
 import com.swiggy.fulfilmentservice.requests.AssignDeliveryRequest;
+import com.swiggy.fulfilmentservice.responses.AssignDeliveryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,10 @@ public class FulfillmentService {
 
     @Autowired
     DeliveryPersonnelService deliveryPersonnelService;
-    public void createDelivery(AssignDeliveryRequest request) throws Exception {
+    @Autowired
+    DeliveryRepository deliveryRepo;
+
+    public AssignDeliveryResponse createDelivery(AssignDeliveryRequest request) throws Exception {
         List<DeliveryPersonnel> deliveryPersonnelList = deliveryPersonnelService.getAll();
         List<Location> locationList = new ArrayList<>();
         deliveryPersonnelList.forEach((deliveryPersonnel -> locationList.add(deliveryPersonnel.getLocation())));
@@ -42,5 +47,9 @@ public class FulfillmentService {
                 personnel.getId(),
                 Status.ASSIGNED
         );
+
+        Delivery delivery = deliveryRepo.save(newDelivery);
+
+        return new AssignDeliveryResponse(delivery.getId(), delivery.getStatus());
     }
 }

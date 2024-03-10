@@ -12,6 +12,7 @@ public class DeliveryPersonnel {
     private long id;
     private String username;
     private Location location;
+    private String role;
 
     public Boolean sameLocation(Location location) {
         return this.location.getLatitude() == location.getLatitude() && this.location.getLongitude() == location.getLongitude();
