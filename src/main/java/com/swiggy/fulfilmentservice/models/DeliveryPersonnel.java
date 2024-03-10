@@ -1,6 +1,8 @@
 package com.swiggy.fulfilmentservice.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.el.parser.BooleanNode;
 
@@ -8,6 +10,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class DeliveryPersonnel {
     private long id;
     private String username;
