@@ -37,4 +37,13 @@ public class Delivery {
     private long deliveryPersonnelId;
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    public Delivery(long orderId, float totalPrice, Location pickupLocation, Location dropLocation, long deliveryPersonnelId, Status status) {
+        this.orderId = orderId;
+        this.totalPrice = totalPrice;
+        this.pickupLocation = pickupLocation;
+        this.dropLocation = dropLocation;
+        this.deliveryPersonnelId = deliveryPersonnelId;
+        this.status = status;
+    }
 }
